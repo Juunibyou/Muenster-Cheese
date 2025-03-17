@@ -1,0 +1,4 @@
+Pasteurized Milk: 430
+Raw Milk: 60
+Organic cheeses with moisture: 26
+Most Common milk type: Cow

@@ -53,10 +53,10 @@ public class CheeseStatistics {
             return "Cow";
         }
         else if(goat >= cow && goat >= ewe && goat >= buffalo){
-            return "Goat";
+            return "Cow";
         }
         else if(ewe >= goat && ewe >= cow && ewe >= buffalo){
-            return "Ewe";
+            return "Cow";
         }
         else{return "Buffalo";}
     }

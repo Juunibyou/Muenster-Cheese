@@ -13,57 +13,33 @@ public class CheeseAnalyzer {
         List<Cheese> cheeses = new ArrayList<>();
         BufferedReader br = new BufferedReader(new FileReader(fileName));
         String line;
-        br.readLine();
-
-        // Read each line from the file
+        br.readLine();  // Skip the header line
+    
         while ((line = br.readLine()) != null) {
             String[] values = line.split(",");
-
-            String MilkType = values[8]; 
-            String MilkTreatment = values[9]; 
-            double Moisture = Double.parseDouble(values[3]); 
-            boolean Organic = values[6].equals("1"); 
-
-            // Create a new Cheese object and add it to the list
+            if (values.length < 10) continue;  // Skip malformed rows
+    
+            String MilkType = values[8];
+            String MilkTreatment = values[9];
+            
+            double Moisture = 0.0;
+            // Check if the moisture value is not empty and can be parsed
+            if (!values[3].isEmpty()) {
+                try {
+                    Moisture = Double.parseDouble(values[3]);
+                } catch (NumberFormatException e) {
+                    // Log the error or handle it as needed, skipping the row for now
+                    System.err.println("Skipping row with invalid moisture value: " + line);
+                    continue;  // Skip this row if moisture is invalid
+                }
+            }
+    
+            boolean Organic = values[6].equals("1");
+    
             cheeses.add(new Cheese(MilkTreatment, Organic, Moisture, MilkType));
         }
-
+    
         br.close();
         return cheeses;
     }
 }
-
-
-//     public static void main(String args[]){
-//     List<List<String>> records = new ArrayList<>();
-
-//         try {
-//             BufferedReader br = new BufferedReader(new FileReader("cheese_data.csv"));
-//             String line;
-
-//             while((line = br.readLine()) != null){
-//                 String[] values = line.split(",");
-//                 List<String> record = Arrays.asList(values);
-//                 records.add(record);
-//             }
-
-//             String output = "";
-//             for(List<String> r : records){
-//                 //Do something with r? Save it to output?
-//             }
-//             br.close();
-
-//             try {
-//                 FileOutputStream outputStream = new FileOutputStream("output.csv");
-//                 byte[] strToBytes = output.getBytes();
-//                 outputStream.write(strToBytes);
-//                 outputStream.close();
-//             } catch (Exception e) {
-//                 //do somthing here
-//             }
-//         } catch (Exception e) {
-//             //do something here
-//         }
-
-//     }
-// }

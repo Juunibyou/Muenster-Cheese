@@ -29,6 +29,6 @@ public class Main {
             byte[] strToBytes = output.getBytes();
             outputStream.write(strToBytes);
         }
-    
+
     }
 }
